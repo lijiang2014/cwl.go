@@ -231,6 +231,8 @@ func (input *Input) Flatten() []string {
 	}
 	flattened := []string{}
 	switch input.Types[0].Type {
+	// case "string":
+	// 	flattened = append(flattened, fmt.Sprintf("%v", input.Provided.Raw))
 	case "array":
 		flattened = append(flattened, input.flatten(input.Types[0].Items[0], input.Types[0].Binding, input.Provided.Raw)...)
 		if len(flattened) == 0 {
@@ -260,7 +262,7 @@ func (input *Input) Flatten() []string {
 			// TODO other case
 		}
 	default:
-		flattened = append(flattened, fmt.Sprintf("%v", input.Provided))
+		flattened = append(flattened, fmt.Sprintf("%v", input.Provided.Raw))
 	}
 	if input.Binding != nil && input.Binding.Prefix != "" {
 		flattened = append([]string{input.Binding.Prefix}, flattened...)

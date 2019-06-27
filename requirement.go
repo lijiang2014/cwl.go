@@ -11,6 +11,7 @@ type Requirement struct {
 	EnvVarRequirement
 	ShellCommandRequirement
 	ResourceRequirement
+	ScedulerRequirement
 	Import string
 }
 
@@ -37,6 +38,10 @@ func (_ Requirement) New(i interface{}) Requirement {
 				dest.Listing = Entry{}.NewList(v)
 			case "$import":
 				dest.Import = v.(string)
+			case "sceduler":
+				dest.Sceduler = v.(string)
+			case "partition":
+				dest.Partition = v.(string)
 			}
 		}
 	}
@@ -157,4 +162,9 @@ type ShellCommandRequirement struct {
 type ResourceRequirement struct {
 	CoresMin int
 	CoresMax int
+}
+
+type ScedulerRequirement struct {
+	Sceduler string
+	Partition string
 }
